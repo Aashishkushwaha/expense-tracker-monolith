@@ -34,6 +34,7 @@ jobs:
 
     # D. Final Check: Check if backend dependencies are getting installed or not?
     - name: Install dependencies
-      run: 
+      # Here pipe(|) symbol indicates that treat each command separately which is on different line
+      run: |
         cd backend 
         pnpm install
