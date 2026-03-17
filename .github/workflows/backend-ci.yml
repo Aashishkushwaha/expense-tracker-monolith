@@ -34,4 +34,6 @@ jobs:
 
     # D. Final Check: Check if backend dependencies are getting installed or not?
     - name: Install dependencies
-      run: cd backend pnpm install
+      run: 
+        cd backend 
+        pnpm install
