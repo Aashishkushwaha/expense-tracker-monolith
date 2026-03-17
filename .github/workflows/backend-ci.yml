@@ -1,0 +1,37 @@
+# 1. workflow name (It will appear on Github actions tab inside Github)
+name: Backend CI
+
+# 2. When to run ? (eg. When you push changes on main branch)
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# 3. What to do ?
+jobs:
+  build:
+    # This will start new Ubuntu (Linux) machine on Github
+    runs-on: ubuntu-latest
+
+    steps:
+    # A. Copy code to virtual machine from Github
+    - uses: actions/checkout@v4
+
+    # B. install pnpm because we're using pnpm for our project
+    - name: Install pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        version: 9
+
+    # C. Setup Node.js version 22 (because we're using Node v22)
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'pnpm'
+        cache-dependency-path: './backend/pnpm-lock.yaml'
+
+    # D. Final Check: Check if backend dependencies are getting installed or not?
+    - name: Install dependencies
+      run: cd backend pnpm install
