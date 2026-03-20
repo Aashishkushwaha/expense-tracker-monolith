@@ -1,0 +1,20 @@
+{
+  "name": "expense-tracker-monolith",
+  "private": true,
+  "scripts": {
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "backend/**/*.js": [
+      "eslint --fix --cwd backend/eslint.config.js",
+      "prettier --write"
+    ],
+    "frontend/**/*.{js,jsx}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+		"husky": "^9.1.7",
+		"lint-staged": "^16.4.0"
+	}
+}
