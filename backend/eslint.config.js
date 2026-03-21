@@ -10,6 +10,7 @@ export default [
       sourceType: 'module',
       globals: {
         ...globals.node, // to allow node.js globals (console, process etc.)
+        ...globals.jest, // to allow jest globals (describe, it, expect etc.)
       },
     },
     rules: {

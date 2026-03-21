@@ -6,11 +6,14 @@
   },
   "lint-staged": {
     "backend/**/*.js": [
-      "eslint --fix --cwd backend/eslint.config.js",
-      "prettier --write"
+      "pnpm --filter expense-tracker-monolith-backend lint:fix",
+      "pnpm --filter expense-tracker-monolith-backend format",
+      "pnpm --filter expense-tracker-monolith-backend test",
+      "git add"
     ],
     "frontend/**/*.{js,jsx}": [
-      "prettier --write"
+      "prettier --write",
+      "git add"
     ]
   },
   "devDependencies": {
