@@ -7,13 +7,13 @@
   "lint-staged": {
     "backend/**/*.js": [
       "pnpm --filter expense-tracker-monolith-backend lint:fix",
-      "pnpm --filter expense-tracker-monolith-backend format",
-      "pnpm --filter expense-tracker-monolith-backend test",
-      "git add"
+      "pnpm --filter expense-tracker-monolith-backend format"
+    ],
+    "backend/tests/**/*.test.js": [
+      "pnpm --filter expense-tracker-monolith-backend test"
     ],
     "frontend/**/*.{js,jsx}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "devDependencies": {
