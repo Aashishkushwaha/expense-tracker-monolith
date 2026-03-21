@@ -15,6 +15,31 @@ export const getAllExpenses = async (req, res) => {
   }
 };
 
+// Get Expense by id
+export const getExpenseById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const expense = await Expense.findByPk(id);
+
+    if (!expense)
+      return errorHandler(
+        res,
+        null,
+        `Get failed: Expense with id: ${id} not found.`,
+        400
+      );
+
+    return res.status(200).json(expense);
+  } catch (error) {
+    return errorHandler(
+      res,
+      error,
+      'Some error occurred while fetching expenses.'
+    );
+  }
+};
+
 // Create New Expense
 export const createNewExpense = async (req, res) => {
   try {
@@ -57,7 +82,7 @@ export const deleteExpense = async (req, res) => {
 
     await Expense.destroy({ where: { id } });
     return res
-      .status(200)
+      .status(204)
       .json({ message: `Expense with id:${id} deleted successfully.` });
   } catch (error) {
     return errorHandler(
