@@ -1,1 +1,1 @@
-npx lint-staged
+pnpm --filter expense-tracker-monolith-backend test:coverage && npx lint-staged

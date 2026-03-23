@@ -1,6 +1,7 @@
 import request from 'supertest';
 import app from '../server.js';
 import { sequelize } from '../config/db.js';
+import { Expense } from '../models/Expense.js';
 
 describe('Expense Tracker API testing', () => {
   // this will run before all tests
@@ -14,6 +15,27 @@ describe('Expense Tracker API testing', () => {
   // close DB connection after running test cases
   afterAll(async () => {
     await sequelize.close();
+  });
+
+  // --- 0. Error Handling ---
+  describe('Handle error cases', () => {
+    it('should handle database errors in catch block', async () => {
+      // 1. Mocking: Hum Sequelize ke 'create' function ko "Error Thrower" bana denge
+      const spy = jest.spyOn(Expense, 'create').mockImplementation(() => {
+        throw new Error('Database Crash!');
+      });
+
+      const res = await request(app)
+        .post('/api/expenses')
+        .send({ title: 'Test', amount: 100 });
+
+      // 2. Validation: Check karo ki kya controller ne 500 error diya?
+      expect(res.statusCode).toBe(500);
+      expect(res.body.message).toContain('error occurred');
+
+      // 3. Cleanup: Mock ko wapas normal kar do warna baaki tests fail ho jayenge
+      spy.mockRestore();
+    });
   });
 
   // --- 1. Create Operations ---

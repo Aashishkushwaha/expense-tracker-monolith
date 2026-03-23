@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "jest --watchAll=false --forceExit",
+    "test:coverage": "jest --coverage --watchAll=false --forceExit",
     "dev": "node --watch server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

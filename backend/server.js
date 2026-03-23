@@ -28,6 +28,7 @@ const initApp = async () => {
 
 // don't need to create server for testing
 // because supertest will automatically create it for testing
+/* istanbul ignore next */ // this will ignore below check from the coverage calculation
 if (process.env.NODE_ENV !== 'test') {
   initApp();
 }

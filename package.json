@@ -10,7 +10,7 @@
       "pnpm --filter expense-tracker-monolith-backend format"
     ],
     "backend/tests/**/*.test.js": [
-      "pnpm --filter expense-tracker-monolith-backend test"
+      "pnpm --filter expense-tracker-monolith-backend test:coverage --findRelatedTests"
     ],
     "frontend/**/*.{js,jsx}": [
       "prettier --write"
